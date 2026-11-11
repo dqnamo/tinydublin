@@ -1,0 +1,102 @@
+{
+ "config": {
+  "name": "dublin-pilot",
+  "comment": "2 x 2 km round O'Connell Bridge. Camera and scale as tiny.london.",
+  "center": {
+   "lat": 53.3472,
+   "lon": -6.2592
+  },
+  "target_height_m": 60,
+  "half_east_m": 1000,
+  "half_north_m": 1000,
+  "max_building_height_m": 90,
+  "margin_m": 60,
+  "azimuth_deg": -15,
+  "elevation_deg": -45,
+  "mpp": 0.293,
+  "shot_px": 2048,
+  "error_target": 8,
+  "lora_prompt": "Fill in the outlined section with the missing pixels corresponding to the <isometric london pixel art> style, removing the border and exactly following the shape/style/structure of the surrounding image (if present).",
+  "seed": 1916
+ },
+ "plan": {
+  "view_bounds_m": {
+   "x0": -1284.7448713917113,
+   "x1": 1284.7448713914202,
+   "y0": -933.0964715965094,
+   "y1": 989.665014090948
+  },
+  "c0": -3,
+  "c1": 2,
+  "r0": -2,
+  "r1": 1
+ },
+ "camera": {
+  "camera_ecef_colmajor": [
+   -0.1010928692199673,
+   0.9828062879086894,
+   0.1545057676593884,
+   0,
+   -0.145044489470637,
+   -0.16820168679356248,
+   0.9750232246639063,
+   0,
+   0.9842470867963373,
+   0.07615768514695435,
+   0.15955462740384727,
+   0,
+   3812724.6677937657,
+   -414498.62209170725,
+   5096943.05727669,
+   1
+  ],
+  "camera_world_colmajor": [
+   -0.1010928692199673,
+   0.15450576765938862,
+   -0.9828062879086894,
+   0,
+   -0.145044489470637,
+   0.9750232246639063,
+   0.1682016867935627,
+   0,
+   0.9842470867963373,
+   0.1595546274038473,
+   -0.07615768514695431,
+   0,
+   3812724.6677937657,
+   5096943.05727669,
+   414498.62209170836,
+   1
+  ],
+  "group_world_colmajor": [
+   1,
+   0,
+   0,
+   0,
+   0,
+   2.220446049250313e-16,
+   -1,
+   0,
+   0,
+   1,
+   2.220446049250313e-16,
+   0,
+   0,
+   0,
+   0,
+   1
+  ],
+  "shot_m": 600.064
+ },
+ "cols": 6,
+ "rows": 4,
+ "canvas_px": {
+  "width": 12288,
+  "height": 8192
+ },
+ "centre_view_m": {
+  "x": -1.4551915228366854e-10,
+  "y": 0
+ },
+ "shots": []
+}

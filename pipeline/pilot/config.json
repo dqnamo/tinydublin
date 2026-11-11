@@ -1,0 +1,17 @@
+{
+  "name": "dublin-pilot",
+  "comment": "2 x 2 km round O'Connell Bridge. Camera and scale as tiny.london.",
+  "center": { "lat": 53.3472, "lon": -6.2592 },
+  "target_height_m": 60,
+  "half_east_m": 1000,
+  "half_north_m": 1000,
+  "max_building_height_m": 90,
+  "margin_m": 60,
+  "azimuth_deg": -15,
+  "elevation_deg": -45,
+  "mpp": 0.293,
+  "shot_px": 2048,
+  "error_target": 8,
+  "lora_prompt": "Fill in the outlined section with the missing pixels corresponding to the <isometric london pixel art> style, removing the border and exactly following the shape/style/structure of the surrounding image (if present).",
+  "seed": 1916
+}

@@ -1,0 +1,16 @@
+.env
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+# Large intermediate files the pipeline writes (not needed to view the map)
+pipeline/*/out/*
+!pipeline/pilot/out/plan.json
+pipeline/metro/*.npy
+pipeline/metro/*.log
+pipeline/metro/viewer/
+pipeline/metro/canvas.json
+pipeline/metro/map.dzi
+pipeline/metro/*_preview.png
+pipeline/metro/overview.png
+pipeline/metro/osm/sea.geojson
