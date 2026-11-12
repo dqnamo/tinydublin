@@ -14,3 +14,6 @@ pipeline/metro/map.dzi
 pipeline/metro/*_preview.png
 pipeline/metro/overview.png
 pipeline/metro/osm/sea.geojson
+
+# Map tiles live in the Cloudflare R2 bucket tinydublin-map, not in git.
+docs/tiles/map_files/

@@ -18,7 +18,7 @@ It follows the method of [tiny.london](https://tiny.london/how) (Boris Starkov),
 ## Layout
 
 ```
-docs/                 the website (GitHub Pages): viewer, places, tile pyramid
+docs/                 the website: viewer, places, clouds, social image (tiles are served from R2)
 pipeline/pilot/       2 x 2 km pilot round O'Connell Bridge; shared camera maths (geo.py)
 pipeline/metro/       the full metro run
   plan.py             shot lattice for the metro box
@@ -48,4 +48,4 @@ On Modal: about $44 for rendering (including failed and re-rendered passes), abo
 
 ## Hosting
 
-The live site runs on Cloudflare: the viewer and the full-quality tile pyramid (34,334 files, 2 GB) are in the R2 bucket `tinydublin-map`, served on tinydublin.com by a small Worker (`hosting/worker.js`). Tiles are cached at the edge for a year; the page for a minute. `docs/` holds a lighter copy (WebP quality 60, under 1 GB) that also works on GitHub Pages.
+The live site runs on Cloudflare: the viewer and the full-quality tile pyramid (34,334 files, 2 GB) are in the R2 bucket `tinydublin-map`, served on tinydublin.com by a small Worker (`hosting/worker.js`). Tiles are cached at the edge for a year; the page for a minute. The tile pyramid is not in this repo; `pipeline/metro/modal_pyramid.py` rebuilds it, and `pipeline/metro/reencode_for_pages.py` makes a lighter copy (WebP quality 60, under 1 GB) if you want to host it on GitHub Pages instead.
