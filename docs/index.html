@@ -68,6 +68,12 @@
     #credit .interface .name { font-weight: 500; line-height: 1.05; letter-spacing: -0.01em; }
     #attrib { position: absolute; left: 8px; bottom: 6px; z-index: 10; font: 10px "Silkscreen", monospace; color: var(--ink);
               background: rgba(251, 247, 236, 0.85); padding: 2px 6px; pointer-events: none; }
+    #pin { z-index: 5; pointer-events: none; text-align: center; }
+    #pin svg { width: 27px; height: 36px; display: block; margin: 0 auto; filter: drop-shadow(2px 2px 0 rgba(38, 48, 61, .35)); }
+    #pin span { display: inline-block; margin-bottom: 4px; padding: 2px 6px; font: 700 11px "Silkscreen", monospace; text-transform: uppercase;
+                background: var(--paper); border: 2px solid var(--ink); white-space: nowrap; }
+    #pin.drop svg { animation: drop 0.5s steps(5) 1; }
+    @keyframes drop { 0% { transform: translateY(-24px); } 60% { transform: translateY(0); } 80% { transform: translateY(-5px); } 100% { transform: translateY(0); } }
     @media (max-width: 40rem) {
       #credit { right: 12px; bottom: 26px; } #credit .pixel { gap: 6px; padding: 6px 9px; font-size: 11px; }
       #credit .dqnamo { font-size: 22px; }
@@ -258,13 +264,33 @@
       updateSmoothing();
     });
     window.addEventListener("hashchange", () => fromHash(false));
+    // Show image point (x, y) at zoomPx screen px per image px, centred in the
+    // part of the screen the search card does not cover. One fitBounds call, so
+    // the result never depends on where the map was before.
     function goTo(x, y, zoomPx, immediate) {
-      const pt = new OpenSeadragon.Point(x / W, y / W);
-      viewer.viewport.panTo(pt, immediate);
-      // zoomPx: screen px per image px
-      const z = viewer.viewport.imageToViewportZoom(zoomPx);
-      viewer.viewport.zoomTo(z, pt, immediate);
+      const size = viewer.viewport.getContainerSize();
+      const panel = document.getElementById("panel");
+      const cover = size.x > 700 ? panel.offsetLeft + panel.offsetWidth : 0;
+      const wImg = size.x / zoomPx, hImg = size.y / zoomPx;
+      const cx = x - (cover / 2) / zoomPx;
+      viewer.viewport.fitBounds(new OpenSeadragon.Rect((cx - wImg / 2) / W, (y - hImg / 2) / W, wImg / W, hImg / W), immediate);
     }
+
+    // Pixel pin on the chosen place.
+    const pin = document.createElement("div");
+    pin.id = "pin";
+    pin.innerHTML = `<svg viewBox="0 0 9 12" shape-rendering="crispEdges" aria-hidden="true">
+      <path d="M2 0h5v1h1v1h1v4h-1v2h-1v2h-1v1h-1v1h-1v-1h-1v-1h-1v-2h-1v-2h-1v-4h1v-1h1z" fill="#26303d"/>
+      <path d="M2 1h5v1h1v4h-1v2h-1v2h-1v1h-1v-1h-1v-2h-1v-2h-1v-4h1z" fill="#e5484d"/>
+      <rect x="3" y="3" width="3" height="3" fill="#fbf7ec"/><rect x="2" y="2" width="1" height="1" fill="#ff8a8d"/></svg>`;
+    pin.insertAdjacentHTML("afterbegin", "<span></span>");
+    function showPin(p) {
+      viewer.removeOverlay(pin);
+      pin.querySelector("span").textContent = p.name;
+      viewer.addOverlay({ element: pin, location: new OpenSeadragon.Point(p.x / W, p.y / W), placement: OpenSeadragon.Placement.BOTTOM });
+      pin.classList.remove("drop"); void pin.offsetWidth; pin.classList.add("drop");
+    }
+
     viewer.addHandler("animation-finish", () => {
       const c = viewer.viewport.getCenter();
       const z = viewer.viewport.viewportToImageZoom(viewer.viewport.getZoom());
@@ -293,7 +319,7 @@
         ul.appendChild(li);
       });
     }
-    function pick(p) { goTo(p.x, p.y, p.zoom || 0.5, false); ul.innerHTML = ""; q.value = p.name; q.blur(); }
+    function pick(p) { goTo(p.x, p.y, p.zoom || 0.5, false); showPin(p); shown = []; ul.innerHTML = ""; q.value = p.name; q.blur(); }
     q.addEventListener("input", () => {
       const s = norm(q.value.trim());
       sel = -1;
