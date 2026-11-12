@@ -31,7 +31,7 @@
     #panel h1 { font: 400 26px/0.9 "Tiny5", monospace; margin: 0; letter-spacing: 1px; text-transform: uppercase; }
     #panel .tag { font-size: 13px; color: var(--muted); margin: 3px 0 0; line-height: 1.15; }
     #panel .logo { width: 30px; height: 30px; flex: none; image-rendering: pixelated; }
-    #info-btn { margin-left: auto; align-self: flex-start; font: 700 13px "Silkscreen", monospace; width: 26px; height: 26px; padding: 0;
+    #info-btn { margin-left: auto; align-self: flex-start; font: 400 18px/1 "Tiny5", monospace; width: 26px; height: 26px; padding: 0;
                 background: var(--paper-2); color: var(--ink); border: 2px solid var(--ink); cursor: pointer; }
     #info-btn:hover, #info-btn[aria-expanded="true"] { background: var(--sel); }
     .search { padding: 0 12px 12px; }
@@ -86,18 +86,11 @@
   <div id="panel">
     <div class="pixel">
       <header>
-        <svg class="logo" viewBox="0 0 10 10" aria-hidden="true" shape-rendering="crispEdges">
-          <rect x="0" y="0" width="10" height="10" fill="#7cc4e8"/><rect x="0" y="7" width="10" height="3" fill="#2f6f8f"/>
-          <rect x="1" y="3" width="2" height="4" fill="#d9744a"/><rect x="3" y="1" width="2" height="6" fill="#f3e3b5"/>
-          <rect x="5" y="4" width="2" height="3" fill="#8a9bb0"/><rect x="7" y="2" width="2" height="5" fill="#d9744a"/>
-          <rect x="3" y="2" width="2" height="1" fill="#26303d"/><rect x="7" y="3" width="2" height="1" fill="#26303d"/>
-          <rect x="1" y="8" width="3" height="1" fill="#7cc4e8"/><rect x="6" y="9" width="3" height="1" fill="#7cc4e8"/>
-        </svg>
         <div>
           <h1>Tiny Dublin</h1>
           <p class="tag">The whole city in pixel art</p>
         </div>
-        <button id="info-btn" aria-expanded="false" aria-controls="about" title="About this map">i</button>
+        <button id="info-btn" aria-expanded="false" aria-controls="about" title="About this map">?</button>
       </header>
       <div class="search">
         <label><input id="q" placeholder="Find Lucan, Howth, the Spire…" autocomplete="off" spellcheck="false" /></label>
