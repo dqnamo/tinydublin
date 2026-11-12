@@ -12,7 +12,8 @@ It follows the method of [tiny.london](https://tiny.london/how) (Boris Starkov),
 2. **Draw.** Each shot area is redrawn by the public [tiny.london LoRA](https://huggingface.co/ktoyame/tiny-london-lora) on Qwen-Image-2.1-Turbo. It runs on Modal H100s as one shared latent per 12,288 px block (MultiDiffusion: 1,024 px windows on a 768 px stride, every other step on a grid shifted 384 px). Each block grows out of its finished neighbours (pinned latents, RePaint), redraws a 384 px strip of them and blends back over 256 px, so there are no seams. 62 blocks run in four phases by the parity of their row and column.
 3. **Sea.** Open sea far from the shore is not drawn by the model. It is pinned to a flat water colour from the start, using the OpenStreetMap coastline refined with the render so that sand flats at Sandymount and Bull Island are still drawn.
 4. **Clean-up.** As in London, the model sometimes draws Big Ben or the Houses of Parliament on empty water. Calm water (OpenStreetMap water and flat, water-coloured render) is repainted flat. The few landmarks left are patched with the colour of their surroundings, and the map is clipped to the metro box.
-5. **Viewer.** The map is a Deep Zoom pyramid of 512 px WebP tiles shown with [OpenSeadragon](https://openseadragon.github.io/), with search over 261 places from OpenStreetMap.
+5. **Clouds.** Instead of a black frame, the map sits in a sea of illustrated clouds (`make_clouds.py`): cartoon cumulus drawn as vector shapes in the browser, with an irregular front that reaches into the map by varying depths (kept clear of named places), a few small clouds drifting over the edge with shadows, and bigger clouds further out. The viewer also skips requesting tiles outside the map outline.
+6. **Viewer.** The map is a Deep Zoom pyramid of 512 px WebP tiles shown with [OpenSeadragon](https://openseadragon.github.io/), with search over 261 places from OpenStreetMap.
 
 ## Layout
 
