@@ -2,7 +2,7 @@
 
 An isometric pixel-art map of metro Dublin, from Lucan to Howth and from Swords to Killiney Hill: about 650 km² as one 124,928 × 83,968 px image you can zoom from the whole city down to single streets.
 
-**Live map:** https://dqnamo.github.io/tiny-dublin/
+**Live map:** https://tinydublin.com
 
 It follows the method of [tiny.london](https://tiny.london/how) (Boris Starkov), which itself built on [isometric.nyc](https://github.com/cannoneyed/isometric-nyc) (Andy Coenen).
 
@@ -44,3 +44,7 @@ On Modal: about $44 for rendering (including failed and re-rendered passes), abo
 - Renderer adapted from **isometric-nyc** by Andy Coenen (MIT licence).
 - Coastline, water and place names © **OpenStreetMap contributors** (ODbL).
 - Method after **tiny.london** and **isometric.nyc**.
+
+## Hosting
+
+The live site runs on Cloudflare: the viewer and the full-quality tile pyramid (34,334 files, 2 GB) are in the R2 bucket `tinydublin-map`, served on tinydublin.com by a small Worker (`hosting/worker.js`). Tiles are cached at the edge for a year; the page for a minute. `docs/` holds a lighter copy (WebP quality 60, under 1 GB) that also works on GitHub Pages.

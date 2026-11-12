@@ -33,14 +33,34 @@
       id: "map",
       prefixUrl: "https://cdn.jsdelivr.net/npm/openseadragon@6.1.1/build/openseadragon/images/",
       tileSources: "tiles/map.dzi",
+      drawer: "canvas",
+      showNavigationControl: false,
       showNavigator: true,
       navigatorPosition: "BOTTOM_LEFT",
-      maxZoomPixelRatio: 3,
-      minZoomImageRatio: 0.5,
+      // As tiny.london: never zoom past 1:1, so every pixel is a drawn pixel.
+      maxZoomPixelRatio: 1,
+      minZoomImageRatio: 0.9,
       visibilityRatio: 0.5,
+      constrainDuringPan: false,
+      animationTime: 0.15,
+      blendTime: 0.1,
+      maxTilesPerFrame: 16,
       imageLoaderLimit: 16,
       immediateRender: false,
+      smoothTileEdgesMinZoom: 1,
+      placeholderFillStyle: "#10151d",
+      gestureSettingsMouse: { clickToZoom: false, dblClickToZoom: true },
+      gestureSettingsTouch: { clickToZoom: false, dblClickToZoom: true, pinchToZoom: true },
     });
+    // Sharp pixels at full detail, smooth when the map is shown smaller.
+    let smooth = null;
+    function updateSmoothing() {
+      const img = viewer.viewport.viewportToImageZoom(viewer.viewport.getZoom(true));
+      const want = img < 0.999;
+      if (want !== smooth) { smooth = want; viewer.drawer.setImageSmoothingEnabled(want); }
+    }
+    viewer.addHandler("animation", updateSmoothing);
+    viewer.addHandler("open", updateSmoothing);
     let W = 1;
     let lastHash = "";
     function fromHash(immediate) {
@@ -52,6 +72,7 @@
       W = viewer.world.getItemAt(0).getContentSize().x;
       if (location.hash.includes("x=")) fromHash(true);
       else goTo(63488, 45032, 0.12, true); // O'Connell Bridge
+      updateSmoothing();
     });
     window.addEventListener("hashchange", () => fromHash(false));
     function goTo(x, y, zoomPx, immediate) {

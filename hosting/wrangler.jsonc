@@ -1,0 +1,10 @@
+{
+  "name": "tinydublin",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-01",
+  "r2_buckets": [{ "binding": "MAP", "bucket_name": "tinydublin-map" }],
+  "routes": [
+    { "pattern": "tinydublin.com", "custom_domain": true },
+    { "pattern": "www.tinydublin.com", "custom_domain": true }
+  ]
+}
